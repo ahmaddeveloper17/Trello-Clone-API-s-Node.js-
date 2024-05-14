@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 
 
-//POST
+//POST Api
  router.post('/addTask', async (req, res) => {
     const token = req.cookies.token;
     const decode = jwt.verify(token, process.env.SECRET_KEY);

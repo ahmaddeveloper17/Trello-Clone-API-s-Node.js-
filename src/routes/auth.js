@@ -4,7 +4,7 @@ const User = require("../models/auth");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// REGISTER
+// REGISTER Api
 
 router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 8);

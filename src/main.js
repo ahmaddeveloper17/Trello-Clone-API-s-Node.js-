@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
-// create app
+// create 
 const main = express();
 
 // cors

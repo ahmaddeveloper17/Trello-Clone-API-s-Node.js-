@@ -8,16 +8,18 @@ const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 8);
-
-  const userData = new User({
-    name:req.body.name,
-    email: req.body.email,
-    password: hashedPassword,
-  });
-
   try {
+    const existingEmail = await User.findOne({email : req.body.email})
+    if(existingEmail){
+      return res.status(400).json({ message: "User already exist" });
+    }
+      const userData = new User({
+        name:req.body.name,
+        email: req.body.email,
+        password: hashedPassword,
+      });
     const user = await userData.save();
-    res.status(201).json({ message: "User registered successfuly!", user });
+    res.status(200).json({ message: "User registered successfuly!", user });
   } catch (error) {
     res.status(400).json({ message: "User cannot registered", error });
   }

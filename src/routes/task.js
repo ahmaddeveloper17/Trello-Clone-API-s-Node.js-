@@ -67,14 +67,23 @@ router.get('/getAuthenticatedTask', async (req, res) => {
         const email = decoded.email;
 
         const tasks = await Task.find({ email: email });
-        res.status(200).json({ tasks, message: 'Tasks get successfully' });
+        res.status(200).json({ tasks, message: 'Authenticated Tasks get  successfully' });
     } catch (error) {
         res.status(400).json({error , message:"This User is not created any task."});
     }
 });
 
 
+// get tasks from search query
 
-
+router.get('/getsearchtasks',async (req,res)=>{
+    try {
+        const searchQuery = "physics";
+        const tasks = await Task.find({title:searchQuery});
+        res.status(200).json({tasks, message:"Tasks get successfully by search query"});
+    } catch (error) {
+        res.status(400).json ({error , message:"Error getting tasks by search query"})
+    }
+})
 
 module.exports = router;
